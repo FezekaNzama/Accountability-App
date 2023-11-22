@@ -6,38 +6,31 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-//import jakarta.persistence.Inheritance;
-//import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity(name = "Custom_User")
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class User {
+@RequiredArgsConstructor
+@Entity
+@Table(name = "users")
+public class User{
+
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "id")
-    private Long id; 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    @NotBlank(message = "Firstname cannot be blank")
+    @NotBlank(message = "username cannot be blank")
     @NonNull
-    @Column(name = "firstname", nullable = false)
-    private String firstname;
+    @Column(nullable = false, unique = true)
+    private String username;
 
-    @NotBlank(message = "Lastname cannot be blank")
+    @NotBlank(message = "password cannot be blank")
     @NonNull
-    @Column(name = "lastname", nullable = false)
-    private String lastname;
-
-    @NotBlank(message = "Email cannot be blank")
-    @NonNull
-    @Column(name = "email", nullable = false)
-    private String email; 
+    @Column(nullable = false)
+    private String password;
+    
 }

@@ -4,18 +4,12 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,37 +20,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "accountabilityPartner")
-public class AccountabilityPartner{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id; 
-
-    @NotBlank(message = "Firstname cannot be blank")
-    @NonNull
-    @Column(name = "firstname", nullable = false)
-    private String firstname;
-
-    @NotBlank(message = "Lastname cannot be blank")
-    @NonNull
-    @Column(name = "lastname", nullable = false)
-    private String lastname;
-
-    @NotBlank(message = "Email cannot be blank")
-    @NonNull
-    @Column(name = "email", nullable = false)
-    private String email; 
+public class AccountabilityPartner extends Customer{
 
     @JsonIgnore
     @OneToMany(mappedBy = "accountabilityPartner", cascade = CascadeType.ALL)
     private List<Goal> goals;
-
-    /*   
-    @JsonIgnore
-    @OneToMany(mappedBy = "accountabilityPartner", cascade = CascadeType.ALL)
-    private List<Goal> goals;
-    */
 
     @JsonIgnore
     @ManyToMany
