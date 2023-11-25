@@ -15,12 +15,10 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ExceptionHandlerFilter extends OncePerRequestFilter{
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-
-        try{
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        try {
             filterChain.doFilter(request, response);
-        } catch(EntityNotFoundException e){
+        } catch (EntityNotFoundException e) { //Feel free to create a separate function.
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             response.getWriter().write("Username doesn't exist");
             response.getWriter().flush();
@@ -32,8 +30,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter{
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("BAD REQUEST");
             response.getWriter().flush();
-        } 
-        
+        }  
     }
     
 }

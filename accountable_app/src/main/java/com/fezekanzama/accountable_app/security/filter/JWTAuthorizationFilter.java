@@ -21,18 +21,17 @@ import jakarta.servlet.http.HttpServletResponse;
 public class JWTAuthorizationFilter extends OncePerRequestFilter{
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        
-        String header = request.getHeader("Authorization");
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String header = request.getHeader(SecurityConstants.AUTHORIZATION);
 
-        if(header == null || header.startsWith(SecurityConstants.BEARER)){
+        if (header == null || !header.startsWith(SecurityConstants.BEARER)) {
+            //System.out.println(header);
             filterChain.doFilter(request, response);
             return;
         }
-        
+
         String token = header.replace(SecurityConstants.BEARER, "");
-        String user  = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET_KEY))
+        String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET_KEY))
             .build()
             .verify(token)
             .getSubject();
