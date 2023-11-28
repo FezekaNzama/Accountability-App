@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,11 +33,6 @@ public class GoalSetterController {
     @GetMapping("/{id}")
     public ResponseEntity<GoalSetter> getGoalSetter(@PathVariable Long id){
         return new ResponseEntity<>(goalSetterService.getGoalSetter(id), HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<GoalSetter> saveGoalSetter(@Valid @RequestBody GoalSetter goalSetter){
-        return new ResponseEntity<>(goalSetterService.saveGoalSetter(goalSetter), HttpStatus.CREATED);
     }
 
    @PutMapping("/{id}")

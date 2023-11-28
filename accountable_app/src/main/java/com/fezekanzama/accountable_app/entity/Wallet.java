@@ -1,6 +1,8 @@
 //This Entity is meant to mirror what a bank account associated with the GoalSetter might look like 
 package com.fezekanzama.accountable_app.entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor 
 @NoArgsConstructor
 @Embeddable
-public class Wallet {
+public class Wallet implements Serializable{
     
     private Long balance;
 

@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,11 +30,6 @@ public class AccountabilityPartnerController {
     @GetMapping("/{id}")
     public ResponseEntity<AccountabilityPartner> getAccountabilityPartner(@PathVariable Long id){
         return new ResponseEntity<>(accountabilityPartnerService.getAccountabilityPartner(id), HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<AccountabilityPartner> saveAccountabilityPartner(@Valid @RequestBody AccountabilityPartner accountabilityPartner){
-        return new ResponseEntity<>(accountabilityPartnerService.saveAccountabilityPartner(accountabilityPartner), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

@@ -4,6 +4,6 @@ import com.fezekanzama.accountable_app.entity.User;
 
 public interface UserService {
     User getUser(Long id);
-    User getUser(String username);
+    User getUserByEmail(String email);
     User saveUser(User user);
 }

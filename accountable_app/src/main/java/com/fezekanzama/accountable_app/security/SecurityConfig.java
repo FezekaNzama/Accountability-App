@@ -34,6 +34,8 @@ public class SecurityConfig {
                 authorizeRequests
                     .requestMatchers(antMatcher("/h2/**")).permitAll()
                     .requestMatchers(antMatcher(HttpMethod.POST, SecurityConstants.REGISTER_PATH)).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.POST, SecurityConstants.REGISTER_PATH_GOAL_SETTER)).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.POST, SecurityConstants.REGISTER_PATH_ACCOUNTABILITY_PARTNER)).permitAll()
                     .anyRequest().authenticated())
             .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
             .addFilter(authenticationFilter)
