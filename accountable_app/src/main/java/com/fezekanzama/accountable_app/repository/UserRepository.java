@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.fezekanzama.accountable_app.entity.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
-    Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
 }

@@ -1,5 +1,7 @@
 package com.fezekanzama.accountable_app.entity;
 
+import java.io.Serializable;
+
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "goal")
-public class Goal {
+public class Goal implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

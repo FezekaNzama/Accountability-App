@@ -6,4 +6,6 @@ public class SecurityConstants {
     public static final String BEARER = "Bearer "; // Authorization : "Bearer " + Token 
     public static final String AUTHORIZATION = "Authorization"; // "Authorization" : Bearer Token
     public static final String REGISTER_PATH = "/user/register"; // Public path that clients can use to register.
+    public static final String REGISTER_PATH_GOAL_SETTER = REGISTER_PATH +"/goalSetter"; // Public path that clients can use to register.
+    public static final String REGISTER_PATH_ACCOUNTABILITY_PARTNER = REGISTER_PATH +"/accountabilityPartner"; // Public path that clients can use to register.
 }

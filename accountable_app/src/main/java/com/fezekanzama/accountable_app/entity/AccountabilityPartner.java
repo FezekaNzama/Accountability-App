@@ -19,8 +19,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "accountabilityPartner")
-public class AccountabilityPartner extends Customer{
+@Entity(name = "Accountability_Partner")
+public class AccountabilityPartner extends User{
 
     @JsonIgnore
     @OneToMany(mappedBy = "accountabilityPartner", cascade = CascadeType.ALL)
