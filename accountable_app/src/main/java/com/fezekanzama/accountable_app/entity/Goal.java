@@ -40,7 +40,7 @@ public class Goal implements Serializable{
 
     @NonNull
     @Column(name = "reward", nullable = false)
-    private Long reward;
+    private int reward;
 
     @NonNull
     @Column(name = "isComplete", nullable = false)
@@ -54,7 +54,7 @@ public class Goal implements Serializable{
     @JoinColumn(name = "accountabilityPartner_id", referencedColumnName = "id")
     private AccountabilityPartner accountabilityPartner;
 
-    public void addToReward(Long amount){
+    public void addToReward(int amount){
         setReward(getReward()+amount);
     }   
 }

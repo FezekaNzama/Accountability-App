@@ -16,13 +16,13 @@ import lombok.Setter;
 @Embeddable
 public class Wallet implements Serializable{
     
-    private Long balance;
+    private int balance;
 
-    public void withdraw(Long withdrawalAmount){
+    public void withdraw(int withdrawalAmount){
         setBalance(getBalance() - withdrawalAmount);
     }
 
-    public void deposit(Long depositAmount){
+    public void deposit(int depositAmount){
         setBalance(getBalance()+depositAmount);
     }
 }

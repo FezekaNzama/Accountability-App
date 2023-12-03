@@ -6,10 +6,12 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.fezekanzama.accountable_app.entity.AccountabilityPartner;
+import com.fezekanzama.accountable_app.entity.DraftGoal;
 import com.fezekanzama.accountable_app.entity.Goal;
 import com.fezekanzama.accountable_app.entity.GoalSetter;
 import com.fezekanzama.accountable_app.exception.EntityNotFoundException;
 import com.fezekanzama.accountable_app.repository.AccountabilityPartnerRepository;
+import com.fezekanzama.accountable_app.repository.DraftGoalRepository;
 import com.fezekanzama.accountable_app.repository.GoalRepository;
 import com.fezekanzama.accountable_app.repository.GoalSetterRepository;
 
@@ -22,6 +24,7 @@ public class GoalServiceImplementation implements GoalService{
     private GoalRepository goalRepository;
     private GoalSetterRepository goalSetterRepository;
     private AccountabilityPartnerRepository accountabilityPartnerRepository;
+    private DraftGoalRepository draftGoalRepository;
 
 
     @Override
@@ -53,6 +56,40 @@ public class GoalServiceImplementation implements GoalService{
         unwrappedGoal.setComplete(goal.isComplete());
         return goalRepository.save(unwrappedGoal);
 
+    }
+
+    //Request Goal Update - send draft goal to draft goal repo
+    @Override
+    public DraftGoal requestGoalUpdate(Long id, Goal goal) {
+        Optional<Goal> optionalGoal = goalRepository.findById(id);
+        Goal unwrappedGoal = unwrapGoal(optionalGoal, id);
+        goal.setId(unwrappedGoal.getId());
+        return draftGoalRepository.save(new DraftGoal(goal));
+    }
+
+    //Only to be called from the DraftGoal service
+    @Override
+    public Goal updateGoal(Long id, Goal goal) {
+        Optional<Goal> optionalGoal = goalRepository.findById(id);
+        Goal unwrappedGoal = unwrapGoal(optionalGoal, id);
+        unwrappedGoal.setTitle(goal.getTitle());
+        unwrappedGoal.setDescription(goal.getDescription());
+        unwrappedGoal.setReward(goal.getReward());
+        unwrappedGoal.setComplete(goal.isComplete());
+        return goalRepository.save(unwrappedGoal);
+    }
+
+    @Override
+    public Goal updateGoal(Long id, Goal goal, int amount) {
+        Optional<Goal> optionalGoal = goalRepository.findById(id);
+        Goal unwrappedGoal = unwrapGoal(optionalGoal, id);
+        unwrappedGoal.setTitle(goal.getTitle());
+        unwrappedGoal.setDescription(goal.getDescription());
+        //add to goal reward amount
+        goal.addToReward(amount);
+        unwrappedGoal.setReward(goal.getReward());
+        unwrappedGoal.setComplete(goal.isComplete());
+        return goalRepository.save(unwrappedGoal);
     }
 
     @Override

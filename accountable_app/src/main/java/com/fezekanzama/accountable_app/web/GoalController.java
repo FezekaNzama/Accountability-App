@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fezekanzama.accountable_app.entity.DraftGoal;
 import com.fezekanzama.accountable_app.entity.Goal;
 import com.fezekanzama.accountable_app.service.GoalService;
 
@@ -40,6 +41,17 @@ public class GoalController {
     public ResponseEntity<Goal> updateGoal(@Valid @RequestBody Goal goal, @PathVariable Long id, @PathVariable Long accountabilityPartnerId){
         return new ResponseEntity<>(goalService.updateGoal(id, goal, accountabilityPartnerId), HttpStatus.OK);
     }
+
+    //paid put request
+    @PutMapping("/{id}/{penalty}")
+    public ResponseEntity<Goal> updateGoal(@Valid @RequestBody Goal goal, @PathVariable Long id, @PathVariable int penalty){
+        return new ResponseEntity<>(goalService.updateGoal(id, goal, penalty), HttpStatus.OK);
+    }
+
+    @PostMapping("/requestGoalUpdate/{id}")
+    public ResponseEntity<DraftGoal> requestGoalUpdate(@Valid @RequestBody Goal goal, @PathVariable Long id){
+        return new ResponseEntity<>(goalService.requestGoalUpdate(id, goal), HttpStatus.OK);
+    }    
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteGoals (@PathVariable Long id){
